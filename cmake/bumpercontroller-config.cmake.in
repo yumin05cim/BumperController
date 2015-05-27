@@ -1,0 +1,54 @@
+# BumperController CMake config file
+#
+# This file sets the following variables:
+# BumperController_FOUND - Always TRUE.
+# BumperController_INCLUDE_DIRS - Directories containing the BumperController include files.
+# BumperController_IDL_DIRS - Directories containing the BumperController IDL files.
+# BumperController_LIBRARIES - Libraries needed to use BumperController.
+# BumperController_DEFINITIONS - Compiler flags for BumperController.
+# BumperController_VERSION - The version of BumperController found.
+# BumperController_VERSION_MAJOR - The major version of BumperController found.
+# BumperController_VERSION_MINOR - The minor version of BumperController found.
+# BumperController_VERSION_REVISION - The revision version of BumperController found.
+# BumperController_VERSION_CANDIDATE - The candidate version of BumperController found.
+
+message(STATUS "Found BumperController-@PROJECT_VERSION@")
+set(BumperController_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(BumperController_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(BumperController_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(BumperController_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(BumperController_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(BumperController_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(BumperController_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(BumperController_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(BumperController_VERSION @PROJECT_VERSION@)
+set(BumperController_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(BumperController_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(BumperController_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(BumperController_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+
